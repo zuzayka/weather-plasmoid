@@ -73,15 +73,39 @@ kquitapp6 plasmashell && plasmashell &
 
 ```
 weather-plasmoid/
-├── build.sh              # Скрипт сборки
-├── install.sh             # Скрипт установки
-├── CMakeLists.txt         # Корневой конфиг CMake
-├── package/                # Пакет плазмоида (QML-интерфейс, иконки, метаданные)
+├── .gitignore
+├── build.sh                  # Скрипт сборки
+├── install.sh                 # Скрипт установки
+├── CMakeLists.txt              # Корневой конфиг CMake
+├── LICENSE
+├── README.md
+├── README.ru.md
+├── screenshots/                # Скриншоты для README
+│   ├── widget-ru.png
+│   ├── widget-en.png
+│   ├── widget-settings-ru.png
+│   └── widget-settings-en.png
+├── package/                     # Пакет плазмоида
+│   ├── metadata.json
 │   └── contents/
 │       ├── config/
-│       └── ui/
-└── weather-backend/        # C++ backend-плагин (запросы к API)
+│       │   └── main.xml
+│       └── ui/                   # QML-интерфейс
+│           ├── main.qml
+│           ├── WeatherCard.qml
+│           ├── WeatherModel.qml
+│           ├── SettingsPanel.qml
+│           ├── configGeneral.qml
+│           ├── LanguageDialog.qml
+│           ├── LocationDialog.qml
+│           └── icons/              # Иконки погодных условий (SVG)
+└── weather-backend/               # C++ backend-плагин (запросы к API)
+    ├── CMakeLists.txt
     └── src/
+        ├── plugin.cpp
+        ├── plugin.json
+        ├── WeatherBackend.cpp
+        └── WeatherBackend.h
 ```
 
 ## Участие в разработке

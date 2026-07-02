@@ -2,31 +2,34 @@
 
 A lightweight, transparent hourly weather widget for **KDE Plasma 6**.
 
-[Русская версия](README.ru.md)
+🇷🇺 [Читать на русском](README.ru.md)
 
-![Plasma 6](https://img.shields.io/badge/Plasma-6.0%2B-1D99F3?logo=kde&logoColor=white)
+![Plasma 6](https://img.shields.io/badge/Plasma-6-1D99F3?logo=kde&logoColor=white)
 ![License](https://img.shields.io/badge/license-GPL--2.0--or--later-blue)
 
 ## Features
 
 - Transparent, minimalist widget that blends into your desktop
-- Automatic location detection via IP, or manual city/coordinates entry
 - Hourly weather forecast
-- Multi-language support (see `LanguageDialog.qml`)
-- Native C++ backend plugin for fast, efficient data fetching
-- Weather data provided by the [MET Norway Weather API](https://api.met.no/) — no API key required
+- Automatic location detection via IP (no setup required)
+- Manual location override (city / coordinates)
+- Multi-language support
+- Weather data provided by [MET Norway](https://api.met.no) — free, no API key required
 
 ## Screenshots
 
-*(add a screenshot or GIF of the widget here)*
+![Widget on desktop](screenshots/widget-en.png)
+![Widget on desktop (ru)](screenshots/widget-ru.png)
+![Widget settings](screenshots/widget-settings-en.png)
+![Widget settings (ru)](screenshots/widget-settings-ru.png)
 
 ## Requirements
 
-- KDE Plasma **6.0** or later
+- KDE Plasma 6.0+
 - Qt 6
-- KDE Frameworks 6 (KF6)
-- CMake ≥ 3.20
-- A C++ compiler with C++17 support
+- CMake 3.20+
+- KDE Frameworks 6 (Plasma and standard KF6 QML dependencies)
+- A C++ compiler (GCC or Clang)
 
 ## Installation
 
@@ -37,7 +40,10 @@ cd weather-plasmoid
 ./install.sh
 ```
 
-`install.sh` copies the compiled backend plugin into the system QML path and requires `sudo` for that step.
+The install script:
+1. Installs the plasmoid package into `~/.local/share/plasma/plasmoids/`
+2. Copies the compiled backend plugin into the Qt6 QML import path (requires `sudo`)
+3. Restarts `plasmashell`
 
 After installation, right-click your desktop or panel → **Add Widgets** → search for **"Weather Plasmoid"**.
 
@@ -51,30 +57,58 @@ kquitapp6 plasmashell && plasmashell &
 
 ## How it works
 
-- On first run, the widget determines your location automatically via [ip-api.com](http://ip-api.com/).
-- You can override this and set a fixed city or coordinates in the widget settings.
-- Forecast data is fetched from the MET Norway `locationforecast/2.0/compact` endpoint, which requires no authentication but does require a descriptive `User-Agent` header (already set in the backend).
+- On first run (or if no location is set manually), the widget queries [ip-api.com](http://ip-api.com/) to determine an approximate location from your IP address.
+- Weather data is then fetched from the [MET Norway Locationforecast API](https://api.met.no/weatherapi/locationforecast/2.0/documentation) — a free service requiring no registration, only a valid `User-Agent` header, which is already implemented in the code.
+- The automatically detected location can be overridden with a fixed one in the widget settings.
+
+## Configuration
+
+Open the widget settings (right-click → **Configure Weather Plasmoid...**) to:
+- Set a fixed location (city + coordinates)
+- Change the display language
 
 ## Project structure
 
 ```
-.
-├── build.sh                 # Build script (CMake + compile)
-├── install.sh                # Install script (copies files, restarts plasmashell)
-├── CMakeLists.txt            # Root build config
-├── package/                  # Plasmoid package (QML frontend)
+weather-plasmoid/
+├── .gitignore
+├── build.sh                  # Build script
+├── install.sh                 # Install script
+├── CMakeLists.txt              # Root CMake config
+├── LICENSE
+├── README.md
+├── README.ru.md
+├── screenshots/                # Screenshots used in the README
+│   ├── widget-ru.png
+│   ├── widget-en.png
+│   ├── widget-settings-ru.png
+│   └── widget-settings-en.png
+├── package/                     # Plasmoid package
 │   ├── metadata.json
 │   └── contents/
 │       ├── config/
-│       └── ui/                # QML UI, icons, dialogs
-└── weather-backend/          # Native C++ backend plugin
+│       │   └── main.xml
+│       └── ui/                   # QML frontend
+│           ├── main.qml
+│           ├── WeatherCard.qml
+│           ├── WeatherModel.qml
+│           ├── SettingsPanel.qml
+│           ├── configGeneral.qml
+│           ├── LanguageDialog.qml
+│           ├── LocationDialog.qml
+│           └── icons/              # Weather condition icons (SVG)
+└── weather-backend/               # Native C++ backend plugin
     ├── CMakeLists.txt
     └── src/
+        ├── plugin.cpp
+        ├── plugin.json
+        ├── WeatherBackend.cpp
+        └── WeatherBackend.h
 ```
 
 ## Contributing
 
-Issues and pull requests are welcome. If you'd like to add a new language, translate `LanguageDialog.qml` and open a PR.
+Issues and pull requests are welcome. If you'd like to add a feature or fix a bug, feel free to open an issue first to discuss the change.
 
 ## License
 
@@ -82,6 +116,6 @@ This project is licensed under the **GPL-2.0-or-later** license — see [LICENSE
 
 ## Credits
 
-- Weather data: [MET Norway](https://api.met.no/)
-- Weather icons: [Yr.no Weather Symbols](https://github.com/nrkno/yr-weather-symbols)
-- IP geolocation: [ip-api.com](http://ip-api.com/)
+- Weather data: [MET Norway](https://api.met.no)
+- Weather icons: [Yr.no weather symbols](https://github.com/metno/weathericons)
+- IP geolocation: [ip-api.com](http://ip-api.com)
