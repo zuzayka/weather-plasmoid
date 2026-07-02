@@ -18,7 +18,10 @@
 
 ## Скриншоты
 
-*(добавь сюда скриншоты — перетащи изображения прямо в этот раздел на GitHub, либо положи их в папку `screenshots/` и укажи ссылку, например: `![скриншот](screenshots/widget.png)`)*
+![Виджет на рабочем столе](screenshots/widget-ru.png)
+![Виджет на рабочем столе (en)](screenshots/widget-en.png)
+![Настройки виджета](screenshots/widget-settings-ru.png)
+![Настройки виджета (en)](screenshots/widget-settings-en.png)
 
 ## Требования
 
