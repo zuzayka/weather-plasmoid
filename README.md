@@ -119,3 +119,4 @@ This project is licensed under the **GPL-2.0-or-later** license — see [LICENSE
 - Weather data: [MET Norway](https://api.met.no)
 - Weather icons: [Yr.no weather symbols](https://github.com/metno/weathericons)
 - IP geolocation: [ip-api.com](http://ip-api.com)
+- Portions of the code and documentation co-written with [Claude](https://claude.ai) (Anthropic)

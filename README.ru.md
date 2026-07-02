@@ -121,3 +121,5 @@ Issues и pull request'ы приветствуются! Если хочешь д
 - Данные о погоде: [MET Norway](https://api.met.no)
 - Иконки погоды: [Yr.no weather symbols](https://github.com/metno/weathericons)
 - IP-геолокация: [ip-api.com](http://ip-api.com)
+- Код и документация написаны в соавторстве с [Claude](https://claude.ai) (Anthropic)
+
