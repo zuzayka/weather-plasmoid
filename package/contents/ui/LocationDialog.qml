@@ -4,7 +4,7 @@ import QtQuick.Layouts 1.15
 
 Window {
     id: locationDialog
-    title: "Местоположение / Location"
+    title: lbl.title
     width: 320
     height: 280
     flags: Qt.Dialog
@@ -19,6 +19,7 @@ Window {
 
     property var labels: ({
         "ru": {
+            "title":   "Местоположение",
             "city":    "Город",
             "lat":     "Широта",
             "lon":     "Долгота",
@@ -26,6 +27,7 @@ Window {
             "city_ph": "Москва"
         },
         "en": {
+            "title":   "Location",
             "city":    "City",
             "lat":     "Latitude",
             "lon":     "Longitude",
