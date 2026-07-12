@@ -98,7 +98,6 @@ PlasmoidItem {
         target: Plasmoid.configuration
         function onLatitudeChanged() {
             weatherModel.latitude = Plasmoid.configuration.latitude
-            weatherModel.refresh()
         }
         function onLongitudeChanged() {
             weatherModel.longitude = Plasmoid.configuration.longitude
